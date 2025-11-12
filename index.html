@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bibliothèque Moderne - Accueil</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/components/header.css">
+    <link rel="stylesheet" href="css/components/modal.css">
+    <link rel="stylesheet" href="css/components/footer.css">
+    <link rel="stylesheet" href="css/pages/accueil.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <i class="fas fa-book-open"></i>
+                <h1>BiblioTech</h1>
+            </div>
+            
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+            
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="nav-link active">Accueil</a></li>
+                    <li><a href="pages/catalogue.html" class="nav-link">Catalogue</a></li>
+                    <li><a href="pages/nouveautes.html" class="nav-link">Nouveautés</a></li>
+                    <li><a href="pages/evenements.html" class="nav-link">Événements</a></li>
+                    <li><a href="pages/contact.html" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+            
+            <div class="auth-buttons">
+                <button class="btn btn-outline" id="login-btn">Connexion</button>
+                <button class="btn btn-primary" id="register-btn">Inscription</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-content">
+            <h2>Bienvenue à la Bibliothèque Moderne</h2>
+            <p>Découvrez notre vaste collection de livres, e-books et ressources numériques. Empruntez, réservez et explorez le monde de la connaissance.</p>
+            
+            <div class="search-bar">
+                <input type="text" placeholder="Rechercher un livre, auteur ou sujet...">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nos Services</h2>
+                <p>Découvrez toutes les fonctionnalités modernes de notre bibliothèque</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3>Prêt de Livres</h3>
+                    <p>Empruntez des livres physiques avec notre système de prêt simplifié et prolongez vos emprunts en ligne.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-laptop"></i>
+                    </div>
+                    <h3>Ressources Numériques</h3>
+                    <p>Accédez à notre bibliothèque numérique avec des milliers d'e-books, articles et ressources en ligne.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <h3>Événements Culturels</h3>
+                    <p>Participez à nos clubs de lecture, ateliers d'écriture et rencontres d'auteurs tout au long de l'année.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-user-friends"></i>
+                    </div>
+                    <h3>Espace Collaboratif</h3>
+                    <p>Utilisez nos espaces de travail collaboratif pour étudier, travailler en groupe ou organiser des réunions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Books Section -->
+    <section class="books">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nouveautés</h2>
+                <p>Découvrez les derniers ajouts à notre collection</p>
+            </div>
+            
+            <div class="books-grid">
+                <!-- Livres seront chargés dynamiquement -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Modales de connexion/inscription -->
+    <div class="modal" id="login-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Connexion</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="login-email">Email</label>
+                    <input type="email" id="login-email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="login-password">Mot de passe</label>
+                    <input type="password" id="login-password" required>
+                </div>
+                
+                <div class="form-options">
+                    <div class="remember-me">
+                        <input type="checkbox" id="remember-me">
+                        <label for="remember-me">Se souvenir de moi</label>
+                    </div>
+                    <a href="#" class="forgot-password">Mot de passe oublié?</a>
+                </div>
+                
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Se connecter</button>
+                
+                <div class="form-footer">
+                    <p>Pas encore de compte? <a href="#" id="switch-to-register">S'inscrire</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="register-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Inscription</h2>
+            <form id="register-form">
+                <div class="form-group">
+                    <label for="register-name">Nom complet</label>
+                    <input type="text" id="register-name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="register-email">Email</label>
+                    <input type="email" id="register-email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="register-password">Mot de passe</label>
+                    <input type="password" id="register-password" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="register-confirm">Confirmer le mot de passe</label>
+                    <input type="password" id="register-confirm" required>
+                </div>
+                
+                <button type="submit" class="btn btn-primary" style="width: 100%;">S'inscrire</button>
+                
+                <div class="form-footer">
+                    <p>Déjà un compte? <a href="#" id="switch-to-login">Se connecter</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>À propos</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Notre histoire</a></li>
+                        <li><a href="#">Équipe</a></li>
+                        <li><a href="#">Partenaires</a></li>
+                        <li><a href="#">Carrières</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Prêt de livres</a></li>
+                        <li><a href="#">Ressources numériques</a></li>
+                        <li><a href="#">Formations</a></li>
+                        <li><a href="#">Espace collaboratif</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Rue de la Lecture, Paris</li>
+                        <li><i class="fas fa-phone"></i> +33 1 23 45 67 89</li>
+                        <li><i class="fas fa-envelope"></i> contact@bibliotech.fr</li>
+                    </ul>
+                    
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 BiblioTech. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/auth.js"></script>
+    <script src="js/pages/accueil.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
