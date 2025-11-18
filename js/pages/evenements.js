@@ -12,7 +12,7 @@ const eventsData = {
             description: "Discussion autour du livre 'L'Étranger' d'Albert Camus. Ouvert à tous les passionnés de littérature. Venez partager vos impressions et analyses dans une ambiance conviviale.",
             maxParticipants: 25,
             currentParticipants: 18,
-            speaker: "Dr. Marie Dubois, spécialiste de la littérature française",
+            speaker: "Dr. Moussa Soulaiman, spécialiste de la littérature",
             requirements: "Avoir lu le livre",
             image: "club-lecture"
         },
@@ -27,22 +27,22 @@ const eventsData = {
             description: "Apprenez les techniques d'écriture créative avec notre auteur en résidence. Exercices pratiques, conseils personnalisés et partage d'expériences.",
             maxParticipants: 15,
             currentParticipants: 12,
-            speaker: "Jean-Luc Martin, auteur publié",
+            speaker: "Rachid Hachi, auteur publié",
             requirements: "Matériel fourni",
             image: "atelier-ecriture"
         },
         {
             id: 3,
-            title: "Rencontre avec Marie Laurent",
+            title: "Rencontre avec Moussa Souleiman",
             type: "rencontre",
             date: "2024-02-05",
             time: "19:00",
             duration: "2h",
             location: "Auditorium",
-            description: "Rencontre exclusive avec Marie Laurent, auteure de 'Le Mystère du Temps'. Échange avec l'auteure suivie d'une séance de dédicaces.",
+            description: "Rencontre exclusive avec Moussa Souleiman, auteure de 'La Transhumance de Saharla'. Échange avec l'auteure suivie d'une séance de dédicaces.",
             maxParticipants: 100,
             currentParticipants: 67,
-            speaker: "Marie Laurent, auteure à succès",
+            speaker: "Moussa Souleiman, auteure à succès",
             requirements: "Entrée libre",
             image: "rencontre-auteur"
         },
@@ -74,7 +74,7 @@ const eventsData = {
             description: "Lecture et discussion autour des poètes contemporains. Moments d'échange et de partage poétique.",
             maxParticipants: 20,
             currentParticipants: 15,
-            speaker: "Élise Moreau, poète",
+            speaker: "Moussa Abdi, poète",
             requirements: "Aucun",
             image: "poesie"
         },
@@ -85,11 +85,11 @@ const eventsData = {
             date: "2023-11-25",
             time: "10:00",
             duration: "4h",
-            location: "Atelier artisanat",
+            location: "Faculte de Science",
             description: "Initiation aux techniques traditionnelles de reliure. Chaque participant repart avec son carnet personnalisé.",
             maxParticipants: 12,
             currentParticipants: 10,
-            speaker: "Pierre Lefebvre, artisan relieur",
+            speaker: "Yacine Mouhoumed, artisan relieur",
             requirements: "Matériel inclus",
             image: "reliure"
         }
@@ -265,21 +265,94 @@ function formatFullDate(dateString) {
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     return date.toLocaleDateString('fr-FR', options);
 }
-
 function showEventDetails(event) {
     const isPast = new Date(event.date) < new Date();
     
-    const detailsHTML = `
-        <strong>Date:</strong> ${formatFullDate(event.date)} à ${event.time}<br>
-        <strong>Durée:</strong> ${event.duration}<br>
-        <strong>Lieu:</strong> ${event.location}<br>
-        <strong>Intervenant:</strong> ${event.speaker}<br>
-        <strong>Type:</strong> ${getEventTypeLabel(event.type)}<br>
-        ${!isPast ? `<strong>Places:</strong> ${event.currentParticipants}/${event.maxParticipants} participants<br>` : ''}
-        <strong>Description:</strong><br>${event.description}
+    // Créer une modale personnalisée
+    const modal = document.createElement('div');
+    modal.className = 'custom-modal';
+    modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 3000;
     `;
     
-    alert(`Détails de l'événement:\n\n${event.title}\n\n${detailsHTML}`);
+    modal.innerHTML = `
+        <div style="
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        ">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                <h3 style="margin: 0; color: var(--primary-color);">${event.title}</h3>
+                <button class="close-modal" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #777;">&times;</button>
+            </div>
+            
+            <div style="margin-bottom: 1.5rem;">
+                <p><strong>Date:</strong> ${formatFullDate(event.date)} à ${event.time}</p>
+                <p><strong>Durée:</strong> ${event.duration}</p>
+                <p><strong>Lieu:</strong> ${event.location}</p>
+                <p><strong>Intervenant:</strong> ${event.speaker}</p>
+                <p><strong>Type:</strong> ${getEventTypeLabel(event.type)}</p>
+                ${!isPast ? `<p><strong>Places:</strong> ${event.currentParticipants}/${event.maxParticipants} participants</p>` : ''}
+            </div>
+            
+            <div>
+                <strong>Description:</strong>
+                <p style="margin-top: 0.5rem; line-height: 1.5;">${event.description}</p>
+            </div>
+            
+            ${!isPast && event.currentParticipants < event.maxParticipants ? `
+            <div style="margin-top: 1.5rem; text-align: center;">
+                <button class="btn btn-primary" id="modal-register-btn">S'inscrire à cet événement</button>
+            </div>
+            ` : ''}
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+    
+    // Fermer la modale
+    modal.querySelector('.close-modal').addEventListener('click', () => {
+        document.body.removeChild(modal);
+    });
+    
+    // Clic à l'extérieur pour fermer
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            document.body.removeChild(modal);
+        }
+    });
+    
+    // Bouton d'inscription dans la modale
+    const registerBtn = modal.querySelector('#modal-register-btn');
+    if (registerBtn) {
+        registerBtn.addEventListener('click', () => {
+            document.body.removeChild(modal);
+            registerForEvent(event);
+        });
+    }
+    
+    // Échap pour fermer
+    const closeModal = (e) => {
+        if (e.key === 'Escape') {
+            document.body.removeChild(modal);
+            document.removeEventListener('keydown', closeModal);
+        }
+    };
+    document.addEventListener('keydown', closeModal);
 }
 
 function setupNewsletter() {
